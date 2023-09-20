@@ -1,0 +1,33 @@
+:root {
+  --base-font-size: 6rem;  /* Define a custom property for the base font size */
+}
+
+#background-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 9998;
+}
+
+#time-date-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #dddddd;
+  z-index: 9999;
+}
+
+#current-time {
+  font-size: var(--base-font-size);
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+#current-date {
+  font-size: calc(var(--base-font-size) * 0.67);
+}
