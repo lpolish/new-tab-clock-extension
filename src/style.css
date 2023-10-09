@@ -31,3 +31,12 @@
 #current-date {
   font-size: calc(var(--base-font-size) * 0.67);
 }
+
+.digit {
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+}
+
+.digit-transition {
+  opacity: 0;
+}
