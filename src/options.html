@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Extension Options</title>
+    <link rel="stylesheet" type="text/css" href="options.css">
+  </head>
+  <body class="dark-mode">
+    <h1>Extension Options</h1>
+    <div>
+      <label for="bgColor">Background Color:</label>
+      <input type="color" id="bgColor">
+    </div>
+    <div>
+      <label for="fontSelector">Font:</label>
+      <select id="fontSelector">
+        <!-- Options will be populated dynamically -->
+      </select>
+    </div>
+    <div>
+<!--       <label for="timeFormat">Time Format:</label>
+      <select id="timeFormat">
+        <option value="24">24-Hour</option>
+        <option value="12">12-Hour</option>
+      </select>
+    </div>
+    <div>
+      <label for="dateFormat">Date Format:</label>
+      <select id="dateFormat">
+        <option value="mm-dd-yyyy">MM-DD-YYYY</option>
+        <option value="dd-mm-yyyy">DD-MM-YYYY</option>
+      </select>
+    </div> -->
+    <div style="margin-top:3rem;">
+      <div>
+        <label for="urlInput">Add URL:</label>
+        <input type="text" id="urlInput" placeholder="Enter URL">
+      </div>
+      <div>
+        <label for="urlTitle">Title:</label>
+        <input type="text" id="urlTitle" placeholder="Enter title">
+      </div>
+      <button id="saveUrl">Add</button>
+    </div>
+    <div id="savedUrls">
+      <h2>Saved URLs</h2>
+      <ul id="urlList">
+        <!-- URLs will be appended here -->
+      </ul>
+    </div>
+    <script src="options.js"></script>
+  </body>
+</html>
