@@ -1,28 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const fonts = [
-    { family: "Arial", type: "Sans-Serif" },
-    { family: "Helvetica", type: "Sans-Serif" },
-    { family: "Georgia", type: "Serif" },
-    { family: "Times New Roman", type: "Serif" },
-    { family: "Courier New", type: "Monospace" },
-    { family: "Lucida Console", type: "Monospace" },
-    { family: "Tahoma", type: "Sans-Serif" },
-    { family: "Geneva", type: "Sans-Serif" },
-    { family: "Trebuchet MS", type: "Sans-Serif" },
-    { family: "Verdana", type: "Sans-Serif" }
-    // Add more fonts as needed
-  ];
-
   const fontSelector = document.getElementById('fontSelector');
 
-  fonts.forEach(font => {
-    const option = document.createElement('option');
-    option.value = font.family;
-    option.textContent = `${font.family} (${font.type})`;
-    fontSelector.appendChild(option);
+  // Fetch the previously selected font from chrome.storage.local
+  chrome.storage.local.get(['font'], function(items) {
+    if (items.font) {
+      // Set the selected option in the fontSelector dropdown
+      fontSelector.value = items.font;
+    }
   });
 
-  chrome.storage.local.get(['bgColor', 'font', 'timeFormat', 'dateFormat'], function(items) {
+  chrome.storage.local.get(['bgColor', 'font', 'timeFormat', 'dateFormat', 'size'], function(items) {
     if (items.bgColor) {
       document.getElementById('bgColor').value = items.bgColor;
     }
@@ -34,6 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     if (items.dateFormat) {
       document.getElementById('dateFormat').value = items.dateFormat;
+    }
+    if (items.size) {
+      document.getElementById('sizeSlider').value = items.size;
     }
   });
 
@@ -55,6 +45,11 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('dateFormat').addEventListener('change', function() {
     const format = this.value;
     chrome.storage.local.set({ 'dateFormat': format });
+  });
+
+  document.getElementById('sizeSlider').addEventListener('input', function() {
+    const size = this.value;
+    chrome.storage.local.set({ 'size': size });
   });
 });
 

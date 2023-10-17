@@ -46,10 +46,21 @@
           dateElement.classList.add("digit-transition");
           setTimeout(() => {
             dateElement.innerText = dateString;
-            dateElement.classList.remove("digit-transition");
+            dateElement.classList.remove ("digit-transition");
           }, 300);
         } else {
           document.getElementById('date-content').innerText = dateString;
+        }
+
+        const currentHour12 = (hours24 % 12).toString().padStart(2, '0');
+        if ((currentHour24 === "04" || currentHour24 === "16") && currentMinute === "20") {
+          const rastaColors = ['#FF0000', '#FFFF00', '#008000'];
+          const randomColor = rastaColors[Math.floor(Math.random() * rastaColors.length)];
+          document.getElementById('current-time').style.color = randomColor;
+          document.getElementById('current-date').style.color = randomColor;
+        } else {
+          document.getElementById('current-time').style.color = '#ffffff';
+          document.getElementById('current-date').style.color = '#ffffff';
         }
 
         prevTime = timeString;
@@ -60,36 +71,6 @@
 
     setInterval(updateTimeAndDate, 1000);
     updateTimeAndDate();
-
-    function updateFavicon() {
-      const canvas = document.createElement('canvas');
-      canvas.width = 16;
-      canvas.height = 16;
-      const ctx = canvas.getContext('2d');
-
-      // Draw background
-      ctx.fillStyle = 'black';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Draw time
-      const now = new Date();
-      const hours = now.getHours().toString().padStart(2, '0');
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      ctx.font = '10px Arial';
-      ctx.fillStyle = 'white';
-      ctx.fillText(hours, 2, 8);
-      ctx.fillText(minutes, 2, 16);
-
-      // Update favicon
-      const favicon = document.getElementById('dynamicFavicon');
-      favicon.href = canvas.toDataURL('image/png');
-    }
-
-    // Call the function every minute
-    setInterval(updateFavicon, 30000);
-
-    // Call it once immediately to set the initial favicon
-    updateFavicon();
   });
 
   function applySettings(settings) {
@@ -133,6 +114,26 @@
       } else if (key === 'font') {
         document.body.style.fontFamily = newValue;
       }
+    }
+  });
+
+  function applySize(size) {
+    const timeElement = document.getElementById('current-time');
+    const dateElement = document.getElementById('current-date');
+    
+    timeElement.style.fontSize = `${size}px`;
+    dateElement.style.fontSize = `${size * 0.6}px`;  // Keeping ratio between time and date
+  }
+
+  chrome.storage.local.get(['size'], function(items) {
+    if (items.size) {
+      applySize(items.size);
+    }
+  });
+
+  chrome.storage.onChanged.addListener(function(changes) {
+    if (changes.size) {
+      applySize(changes.size.newValue);
     }
   });
 })();

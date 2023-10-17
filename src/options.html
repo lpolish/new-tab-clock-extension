@@ -11,12 +11,33 @@
       <input type="color" id="bgColor">
     </div>
     <div>
-      <label for="fontSelector">Font:</label>
+      <label for="fontSelector">Choose a font:</label>
       <select id="fontSelector">
-        <!-- Options will be populated dynamically -->
+        <optgroup label="Sans-Serif">
+          <option value="'Arial', sans-serif">Arial</option>
+          <option value="'Helvetica', sans-serif">Helvetica</option>
+          <option value="'Tahoma', sans-serif">Tahoma</option>
+          <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+          <option value="'Verdana', sans-serif">Verdana</option>
+        </optgroup>
+        <optgroup label="Serif">
+          <option value="'Times New Roman', serif">Times New Roman</option>
+          <option value="'Georgia', serif">Georgia</option>
+        </optgroup>
+        <optgroup label="Monospace">
+          <option value="'Courier New', monospace">Courier New</option>
+          <option value="'Lucida Console', monospace">Lucida Console</option>
+        </optgroup>
       </select>
     </div>
     <div>
+
+    <div>
+      <label for="sizeSlider">Size:</label>
+      <input type="range" id="sizeSlider" min="10" max="100" step="1">
+    </div>
+
+
 <!--       <label for="timeFormat">Time Format:</label>
       <select id="timeFormat">
         <option value="24">24-Hour</option>

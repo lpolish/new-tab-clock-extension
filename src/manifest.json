@@ -1,27 +1,22 @@
 {
   "manifest_version": 3,
   "name": "New Tab Clock",
-  "version": "1.2.0",
-  "description": "A sleek clock and date for your new tab page.",
-  "action": {
-    "default_popup": "index.html"
-  },
-  "chrome_url_overrides": {
-    "newtab": "index.html"
-  },
-  "options_page": "options.html",
-  "background": {
-    "service_worker": "background.js",
-    "type": "module"
-  },
+  "version": "1.1.0",
+  "description": "Displays a digital clock and date on new tab pages.",
   "permissions": [
     "storage"
   ],
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
-      "js": [
-        "content.js"
-      ]
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
     }
-  ]
+  ],
+  "options_page": "options.html"
 }

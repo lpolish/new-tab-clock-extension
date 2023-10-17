@@ -1,12 +1,13 @@
 # CHANGELOG
 
-## [1.2.0] - 2023-10-12
+## [1.2.0] - 2023-10-17
 
 ### Added
 - Dynamic favicon that updates every minute to display time.
 - URL container to display saved URLs on the new tab.
 - Extended options in `manifest.json` including options page, background script, and required permissions.
 - Various styling updates for better UX including hover effects.
+- Enhanced the clock to display colors (red, yellow, green) at appropriate time for a fun touch.
 
 ### Fixed
 - Resolved z-index and background color issues for better visibility and customization.
