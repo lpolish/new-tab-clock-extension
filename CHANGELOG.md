@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [1.3.0] - 2023-11-15
+
+### Improved
+- Optimized memory management in `script.js` to prevent potential memory leaks by efficiently handling intervals.
+
 ## [1.2.0] - 2023-10-17
 
 ### Added

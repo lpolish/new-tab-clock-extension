@@ -2,6 +2,7 @@
   let prevTime = "00:00:00";
   let prevMinute = "00";
   let prevDate = "";
+  let updateInterval;
 
   document.addEventListener('DOMContentLoaded', function() {
     function updateTimeAndDate() {
@@ -52,24 +53,16 @@
           document.getElementById('date-content').innerText = dateString;
         }
 
-        const currentHour12 = (hours24 % 12).toString().padStart(2, '0');
-        if ((currentHour24 === "04" || currentHour24 === "16") && currentMinute === "20") {
-          const rastaColors = ['#FF0000', '#FFFF00', '#008000'];
-          const randomColor = rastaColors[Math.floor(Math.random() * rastaColors.length)];
-          document.getElementById('current-time').style.color = randomColor;
-          document.getElementById('current-date').style.color = randomColor;
-        } else {
-          document.getElementById('current-time').style.color = '#ffffff';
-          document.getElementById('current-date').style.color = '#ffffff';
-        }
-
         prevTime = timeString;
         prevMinute = currentMinute;
         prevDate = dateString;
+
+        updateFavicon(currentHour24, currentMinute);
       }
     }
 
-    setInterval(updateTimeAndDate, 1000);
+    clearInterval(updateInterval);
+    updateInterval = setInterval(updateTimeAndDate, 1000);
     updateTimeAndDate();
   });
 
@@ -93,11 +86,10 @@
 
   chrome.storage.local.get(['bgColor', 'font', 'urls'], function(items) {
     applySettings(items);
-  
-    // Display saved URLs
+
     const urls = items.urls || [];
     const urlContainer = document.getElementById('urlContainer');
-    urlContainer.innerHTML = ''; // Clear existing URLs
+    urlContainer.innerHTML = '';
     urls.forEach(function(urlObj) {
       const urlElement = document.createElement('a');
       urlElement.href = urlObj.url;
@@ -122,7 +114,26 @@
     const dateElement = document.getElementById('current-date');
     
     timeElement.style.fontSize = `${size}px`;
-    dateElement.style.fontSize = `${size * 0.6}px`;  // Keeping ratio between time and date
+    dateElement.style.fontSize = `${size * 0.6}px`;
+  }
+
+  function updateFavicon(hour, minute) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 16;
+    canvas.height = 16;
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, 16, 16);
+
+    ctx.fillStyle = 'white';
+    ctx.font = '10px Arial';
+
+    ctx.fillText(hour, 2, 8);
+    ctx.fillText(minute, 2, 16);
+
+    const favicon = document.getElementById('dynamicFavicon');
+    favicon.href = canvas.toDataURL('image/png');
   }
 
   chrome.storage.local.get(['size'], function(items) {
