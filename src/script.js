@@ -118,15 +118,19 @@
   }
 
   function updateFavicon(hour, minute) {
+    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const bgColor = isDarkMode ? 'black' : 'white';
+    const textColor = isDarkMode ? 'white' : 'black';
+
     const canvas = document.createElement('canvas');
     canvas.width = 16;
     canvas.height = 16;
     const ctx = canvas.getContext('2d');
 
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, 16, 16);
 
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = textColor;
     ctx.font = '10px Arial';
 
     ctx.fillText(hour, 2, 8);

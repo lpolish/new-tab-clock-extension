@@ -1,7 +1,7 @@
-/* Dark Mode Design */
+/* Default (Light Mode) Design */
 body {
-  background-color: #333;
-  color: white;
+  background-color: #fff;
+  color: black;
   font-family: Arial, sans-serif;
   margin: 20px;
 }
@@ -24,6 +24,19 @@ input[type=color], select, input[type=text], button {
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 3px;
-  background: #444;
-  color: white;
+  background: #fff;
+  color: black;
+}
+
+/* Dark Mode Design */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #333;
+    color: white;
+  }
+
+  input[type=color], select, input[type=text], button {
+    background: #444;
+    color: white;
+  }
 }

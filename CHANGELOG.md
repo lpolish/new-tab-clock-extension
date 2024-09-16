@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [1.3.1] - 2024-09-16
+## Improved
+- Added support for dynamic system theme config (black/light) including the favicon.
+
 ## [1.3.0] - 2023-11-15
 
 ### Improved
