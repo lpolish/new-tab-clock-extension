@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const sizeValue = document.getElementById('sizeValue');
   
   sizeSlider.addEventListener('input', function() {
-    sizeValue.textContent = this.value;
+    const size = this.value;
+    sizeValue.textContent = size;
+    chrome.storage.local.set({ 'size': size });
   });
 
   chrome.storage.local.get(['bgColor', 'font', 'fontColor', 'timeFormat', 'dateFormat', 'size'], function(items) {
@@ -52,11 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('dateFormat').addEventListener('change', function() {
     const format = this.value;
     chrome.storage.local.set({ 'dateFormat': format });
-  });
-
-  sizeSlider.addEventListener('input', function() {
-    const size = this.value;
-    chrome.storage.local.set({ 'size': size });
   });
 });
 
