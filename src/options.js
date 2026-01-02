@@ -1,14 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const fontSelector = document.getElementById('fontSelector');
-
-  // Fetch the previously selected font from chrome.storage.local
-  chrome.storage.local.get(['font'], function(items) {
-    if (items.font) {
-      // Set the selected option in the fontSelector dropdown
-      fontSelector.value = items.font;
-    }
-  });
-
   chrome.storage.local.get(['bgColor', 'font', 'fontColor', 'timeFormat', 'dateFormat', 'size'], function(items) {
     if (items.bgColor) {
       document.getElementById('bgColor').value = items.bgColor;
