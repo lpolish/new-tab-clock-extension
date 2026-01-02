@@ -16,6 +16,25 @@
         <span id="date-content"></span>
       </div>
     </div>
+    
+    <!-- Settings link in bottom-left corner -->
+    <a id="settings-link" href="options.html" title="Customize your clock" aria-label="Open settings">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M17.43 10.98A7.793 7.793 0 0018 8.5c0-.85-.12-1.68-.35-2.48l-2.27-.99a6.23 6.23 0 00-1.25-2.01l.41-2.5A7.83 7.83 0 0010.98.07L9.5 1.82a6.116 6.116 0 00-2.83 0L5.19.07a7.83 7.83 0 00-3.56.45l.41 2.5a6.23 6.23 0 00-1.25 2.01L.52 6.02C.29 6.82.17 7.65.17 8.5c0 .88.13 1.73.37 2.54l2.27.96c.3.75.72 1.43 1.25 2.02l-.41 2.5c1.05.39 2.2.61 3.39.61.4 0 .8-.03 1.19-.08l1.48-1.75c.94.15 1.9.15 2.84 0l1.48 1.75c.39.05.79.08 1.19.08 1.19 0 2.34-.22 3.39-.61l-.41-2.5a6.538 6.538 0 001.25-2.02l2.27-.96zM10 13a4.5 4.5 0 110-9 4.5 4.5 0 010 9z"/>
+      </svg>
+      <span>Settings</span>
+    </a>
+
+    <!-- Onboarding welcome modal -->
+    <div id="welcome-modal" class="modal" role="dialog" aria-labelledby="welcome-title" aria-modal="true">
+      <div class="modal-content">
+        <h2 id="welcome-title">Welcome to New Tab Clock! 🎉</h2>
+        <p>Thank you for installing our minimalist clock extension.</p>
+        <p>You can customize your clock's appearance, colors, and fonts by clicking the <strong>Settings</strong> link in the bottom-left corner.</p>
+        <button id="welcome-close" class="modal-button">Get Started</button>
+      </div>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>

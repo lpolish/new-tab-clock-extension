@@ -155,4 +155,30 @@
       applySize(changes.size.newValue);
     }
   });
+
+  // Welcome modal logic - show only once on first install
+  chrome.storage.local.get(['hasSeenWelcome'], function(items) {
+    if (!items.hasSeenWelcome) {
+      const modal = document.getElementById('welcome-modal');
+      const closeBtn = document.getElementById('welcome-close');
+      
+      // Show modal after a short delay
+      setTimeout(() => {
+        modal.classList.add('show');
+      }, 800);
+
+      closeBtn.addEventListener('click', function() {
+        modal.classList.remove('show');
+        chrome.storage.local.set({ 'hasSeenWelcome': true });
+      });
+
+      // Close on background click
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('show');
+          chrome.storage.local.set({ 'hasSeenWelcome': true });
+        }
+      });
+    }
+  });
 })();

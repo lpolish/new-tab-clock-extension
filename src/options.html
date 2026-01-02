@@ -1,76 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Extension Options</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock Settings</title>
     <link rel="stylesheet" type="text/css" href="options.css">
   </head>
-  <body class="dark-mode">
-    <h1>Extension Options</h1>
-    <div>
-      <label for="bgColor">Background Color:</label>
-      <input type="color" id="bgColor">
-    </div>
-    <div>
-      <label for="fontColor">Font Color:</label>
-      <input type="color" id="fontColor">
-    </div>
-    <div>
-      <label for="fontSelector">Choose a font:</label>
-      <select id="fontSelector">
-        <optgroup label="Sans-Serif">
-          <option value="'Arial', sans-serif">Arial</option>
-          <option value="'Helvetica', sans-serif">Helvetica</option>
-          <option value="'Tahoma', sans-serif">Tahoma</option>
-          <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
-          <option value="'Verdana', sans-serif">Verdana</option>
-        </optgroup>
-        <optgroup label="Serif">
-          <option value="'Times New Roman', serif">Times New Roman</option>
-          <option value="'Georgia', serif">Georgia</option>
-        </optgroup>
-        <optgroup label="Monospace">
-          <option value="'Courier New', monospace">Courier New</option>
-          <option value="'Lucida Console', monospace">Lucida Console</option>
-        </optgroup>
-      </select>
-    </div>
-    <div>
+  <body>
+    <div class="container">
+      <header>
+        <h1>⚙️ Clock Settings</h1>
+        <p class="subtitle">Customize your new tab clock experience</p>
+      </header>
 
-    <div>
-      <label for="sizeSlider">Size:</label>
-      <input type="range" id="sizeSlider" min="10" max="100" step="1">
-    </div>
+      <main>
+        <section class="settings-section">
+          <h2>Appearance</h2>
+          <div class="settings-grid">
+            <div class="setting-item">
+              <label for="bgColor">Background Color</label>
+              <input type="color" id="bgColor" aria-label="Choose background color">
+            </div>
+            <div class="setting-item">
+              <label for="fontColor">Font Color</label>
+              <input type="color" id="fontColor" aria-label="Choose font color">
+            </div>
+          </div>
+        </section>
 
+        <section class="settings-section">
+          <h2>Typography</h2>
+          <div class="setting-item">
+            <label for="fontSelector">Font Family</label>
+            <select id="fontSelector" aria-label="Choose font family">
+              <optgroup label="Sans-Serif">
+                <option value="'Arial', sans-serif">Arial</option>
+                <option value="'Helvetica', sans-serif">Helvetica</option>
+                <option value="'Tahoma', sans-serif">Tahoma</option>
+                <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+                <option value="'Verdana', sans-serif">Verdana</option>
+              </optgroup>
+              <optgroup label="Serif">
+                <option value="'Times New Roman', serif">Times New Roman</option>
+                <option value="'Georgia', serif">Georgia</option>
+              </optgroup>
+              <optgroup label="Monospace">
+                <option value="'Courier New', monospace">Courier New</option>
+                <option value="'Lucida Console', monospace">Lucida Console</option>
+              </optgroup>
+            </select>
+          </div>
 
-      <label for="timeFormat">Time Format:</label>
-      <select id="timeFormat">
-        <option value="24">24-Hour</option>
-        <option value="12">12-Hour</option>
-      </select>
-    </div>
-    <div>
-      <label for="dateFormat">Date Format:</label>
-      <select id="dateFormat">
-        <option value="mm-dd-yyyy">MM-DD-YYYY</option>
-        <option value="dd-mm-yyyy">DD-MM-YYYY</option>
-      </select>
-    </div>
-    <div style="margin-top:3rem;">
-      <div>
-        <label for="urlInput">Add URL:</label>
-        <input type="text" id="urlInput" placeholder="Enter URL">
-      </div>
-      <div>
-        <label for="urlTitle">Title:</label>
-        <input type="text" id="urlTitle" placeholder="Enter title">
-      </div>
-      <button id="saveUrl">Add</button>
-    </div>
-    <div id="savedUrls">
-      <h2>Saved URLs</h2>
-      <ul id="urlList">
-        <!-- URLs will be appended here -->
-      </ul>
+          <div class="setting-item">
+            <label for="sizeSlider">Clock Size</label>
+            <div class="slider-container">
+              <input type="range" id="sizeSlider" min="10" max="100" step="1" aria-label="Adjust clock size">
+              <span id="sizeValue" class="slider-value">55</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="settings-section">
+          <h2>Format</h2>
+          <div class="settings-grid">
+            <div class="setting-item">
+              <label for="timeFormat">Time Format</label>
+              <select id="timeFormat" aria-label="Choose time format">
+                <option value="24">24-Hour</option>
+                <option value="12">12-Hour</option>
+              </select>
+            </div>
+            <div class="setting-item">
+              <label for="dateFormat">Date Format</label>
+              <select id="dateFormat" aria-label="Choose date format">
+                <option value="mm-dd-yyyy">MM-DD-YYYY</option>
+                <option value="dd-mm-yyyy">DD-MM-YYYY</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section class="settings-section">
+          <h2>Quick Links</h2>
+          <div class="url-input-group">
+            <div class="setting-item">
+              <label for="urlInput">URL</label>
+              <input type="url" id="urlInput" placeholder="https://example.com" aria-label="Enter URL">
+            </div>
+            <div class="setting-item">
+              <label for="urlTitle">Title</label>
+              <input type="text" id="urlTitle" placeholder="Example Site" aria-label="Enter title">
+            </div>
+            <button id="saveUrl" class="add-button" aria-label="Add URL">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0a1 1 0 011 1v6h6a1 1 0 110 2H9v6a1 1 0 11-2 0V9H1a1 1 0 010-2h6V1a1 1 0 011-1z"/>
+              </svg>
+              Add Link
+            </button>
+          </div>
+          
+          <div id="savedUrls">
+            <ul id="urlList" role="list">
+              <!-- URLs will be appended here -->
+            </ul>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p>Changes are saved automatically</p>
+      </footer>
     </div>
     <script src="options.js"></script>
   </body>

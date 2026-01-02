@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // Update slider value display
+  const sizeSlider = document.getElementById('sizeSlider');
+  const sizeValue = document.getElementById('sizeValue');
+  
+  sizeSlider.addEventListener('input', function() {
+    sizeValue.textContent = this.value;
+  });
+
   chrome.storage.local.get(['bgColor', 'font', 'fontColor', 'timeFormat', 'dateFormat', 'size'], function(items) {
     if (items.bgColor) {
       document.getElementById('bgColor').value = items.bgColor;
@@ -16,7 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('dateFormat').value = items.dateFormat;
     }
     if (items.size) {
-      document.getElementById('sizeSlider').value = items.size;
+      sizeSlider.value = items.size;
+      sizeValue.textContent = items.size;
     }
   });
 
@@ -45,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
     chrome.storage.local.set({ 'dateFormat': format });
   });
 
-  document.getElementById('sizeSlider').addEventListener('input', function() {
+  sizeSlider.addEventListener('input', function() {
     const size = this.value;
     chrome.storage.local.set({ 'size': size });
   });

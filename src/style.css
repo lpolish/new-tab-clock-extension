@@ -85,4 +85,142 @@
     color: #fff;
     background-color: rgba(0, 0, 0, 0.6);
   }
+
+  #settings-link {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  #settings-link:hover {
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Settings link in bottom-left corner */
+#settings-link {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  color: rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  z-index: 9999;
+  background-color: transparent;
+}
+
+#settings-link:hover {
+  color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: translateX(2px);
+}
+
+#settings-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Welcome modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  max-width: 480px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease-out;
+}
+
+.modal-content h2 {
+  margin: 0 0 20px 0;
+  font-size: 28px;
+  color: #333;
+}
+
+.modal-content p {
+  margin: 12px 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.modal-button {
+  margin-top: 24px;
+  padding: 12px 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.modal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.modal-button:active {
+  transform: translateY(0);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .modal-content {
+    background: #2a2a2a;
+  }
+
+  .modal-content h2 {
+    color: #fff;
+  }
+
+  .modal-content p {
+    color: #ccc;
+  }
 }
