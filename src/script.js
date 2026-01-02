@@ -68,23 +68,21 @@
 
   function applySettings(settings) {
     if (settings.bgColor) {
-      document.body.style.backgroundColor = settings.bgColor;
+      document.getElementById('background-layer').style.backgroundColor = settings.bgColor;
     }
     if (settings.font) {
       document.body.style.fontFamily = settings.font;
     }
-    if (settings.bgColor) {
-      document.getElementById('background-layer').style.backgroundColor = `rgba(${settings.bgColor}, 0.5)`;
-    }
     if (settings.fontColor) {
-      const urlLinks = document.querySelectorAll('.url-link');
+      document.getElementById('time-date-container').style.color = settings.fontColor;
+      const urlLinks = document.querySelectorAll('#urlContainer a');
       urlLinks.forEach(url => {
         url.style.color = settings.fontColor;
       });
     }
   }
 
-  chrome.storage.local.get(['bgColor', 'font', 'urls'], function(items) {
+  chrome.storage.local.get(['bgColor', 'font', 'fontColor', 'urls'], function(items) {
     applySettings(items);
 
     const urls = items.urls || [];
@@ -102,9 +100,15 @@
     for (var key in changes) {
       const newValue = changes[key].newValue;
       if (key === 'bgColor') {
-        document.body.style.backgroundColor = newValue;
+        document.getElementById('background-layer').style.backgroundColor = newValue;
       } else if (key === 'font') {
         document.body.style.fontFamily = newValue;
+      } else if (key === 'fontColor') {
+        document.getElementById('time-date-container').style.color = newValue;
+        const urlLinks = document.querySelectorAll('#urlContainer a');
+        urlLinks.forEach(url => {
+          url.style.color = newValue;
+        });
       }
     }
   });

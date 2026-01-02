@@ -9,9 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  chrome.storage.local.get(['bgColor', 'font', 'timeFormat', 'dateFormat', 'size'], function(items) {
+  chrome.storage.local.get(['bgColor', 'font', 'fontColor', 'timeFormat', 'dateFormat', 'size'], function(items) {
     if (items.bgColor) {
       document.getElementById('bgColor').value = items.bgColor;
+    }
+    if (items.fontColor) {
+      document.getElementById('fontColor').value = items.fontColor;
     }
     if (items.font) {
       document.getElementById('fontSelector').value = items.font;
@@ -30,6 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('bgColor').addEventListener('change', function() {
     const color = this.value;
     chrome.storage.local.set({ 'bgColor': color });
+  });
+
+  document.getElementById('fontColor').addEventListener('change', function() {
+    const color = this.value;
+    chrome.storage.local.set({ 'fontColor': color });
   });
 
   document.getElementById('fontSelector').addEventListener('change', function() {
