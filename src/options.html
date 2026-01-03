@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clock Settings</title>
     <link rel="stylesheet" type="text/css" href="options.css">
+    <link rel="stylesheet" type="text/css" href="cropper.css">
   </head>
   <body>
     <div class="container">
@@ -29,7 +30,68 @@
         </section>
 
         <section class="settings-section">
-          <h2>Typography</h2>
+          <h2>Background Image</h2>
+          <div class="setting-item">
+            <label for="bgImageInput">Upload Background Image</label>
+            <input type="file" id="bgImageInput" accept="image/*" aria-label="Upload background image">
+          </div>
+          <div id="cropper-container" style="display: none;">
+            <img id="cropper-image" src="" alt="Image to crop">
+            <div class="cropper-buttons">
+              <button id="crop-save" class="add-button">Save Cropped Image</button>
+              <button id="crop-cancel" class="modal-button">Cancel</button>
+            </div>
+          </div>
+          <div class="settings-grid">
+            <div class="setting-item">
+              <label for="bgSize">Background Size</label>
+              <select id="bgSize" aria-label="Choose background size">
+                <option value="cover">Cover (expanded)</option>
+                <option value="contain">Contain</option>
+                <option value="auto">Auto</option>
+              </select>
+            </div>
+            <div class="setting-item">
+              <label for="bgRepeat">Background Repeat</label>
+              <select id="bgRepeat" aria-label="Choose background repeat">
+                <option value="no-repeat">No Repeat</option>
+                <option value="repeat">Repeat</option>
+                <option value="repeat-x">Repeat X</option>
+                <option value="repeat-y">Repeat Y</option>
+              </select>
+            </div>
+          </div>
+          <div class="settings-grid">
+            <div class="setting-item">
+              <label for="brightness">Brightness</label>
+              <div class="slider-container">
+                <input type="range" id="brightness" min="0" max="2" step="0.1" value="1" aria-label="Adjust brightness">
+                <span id="brightnessValue" class="slider-value">1</span>
+              </div>
+            </div>
+            <div class="setting-item">
+              <label for="contrast">Contrast</label>
+              <div class="slider-container">
+                <input type="range" id="contrast" min="0" max="2" step="0.1" value="1" aria-label="Adjust contrast">
+                <span id="contrastValue" class="slider-value">1</span>
+              </div>
+            </div>
+            <div class="setting-item">
+              <label for="opacity">Opacity</label>
+              <div class="slider-container">
+                <input type="range" id="opacity" min="0" max="1" step="0.1" value="1" aria-label="Adjust opacity">
+                <span id="opacityValue" class="slider-value">1</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="settings-section">
+          <h2>Current Background Image</h2>
+          <div id="image-preview" style="display: none;">
+            <img id="preview-img" src="" alt="Current background image" style="max-width: 300px; border: 1px solid #ccc;">
+          </div>
+        </section>
           <div class="setting-item">
             <label for="fontSelector">Font Family</label>
             <select id="fontSelector" aria-label="Choose font family">
@@ -111,6 +173,7 @@
         <p>Changes are saved automatically</p>
       </footer>
     </div>
+    <script src="cropper.min.js"></script>
     <script src="options.js"></script>
   </body>
 </html>

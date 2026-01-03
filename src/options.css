@@ -9,7 +9,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
-  padding: 40px 20px;
+  padding: 20px 10px;
   color: #333;
 }
 
@@ -26,7 +26,7 @@ body {
 header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 40px;
+  padding: 20px;
   text-align: center;
 }
 
@@ -43,11 +43,11 @@ header h1 {
 
 /* Main Content */
 main {
-  padding: 40px;
+  padding: 20px;
 }
 
 .settings-section {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .settings-section h2 {
@@ -256,6 +256,30 @@ input[type="range"]::-moz-range-thumb:hover {
   transform: scale(1.05);
 }
 
+/* Saved URLs scrolling */
+#savedUrls {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Cropper styles */
+#cropper-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#cropper-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.cropper-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
 /* Footer */
 footer {
   background: #f8f9fa;
@@ -315,6 +339,10 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  body {
+    padding: 10px 5px;
+  }
+
   .url-input-group {
     grid-template-columns: 1fr;
   }
@@ -324,6 +352,10 @@ footer {
   }
 
   main {
-    padding: 30px 20px;
+    padding: 20px 10px;
+  }
+
+  footer {
+    padding: 20px 10px;
   }
 }

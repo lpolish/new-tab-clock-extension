@@ -86,14 +86,6 @@
     background-color: rgba(0, 0, 0, 0.6);
   }
 
-  #settings-link {
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  #settings-link:hover {
-    color: rgba(255, 255, 255, 0.9);
-    background-color: rgba(255, 255, 255, 0.1);
-  }
 }
 
 /* Settings link in bottom-left corner */
@@ -103,22 +95,24 @@
   left: 20px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  color: rgba(0, 0, 0, 0.5);
+  gap: 6px;
+  padding: 8px 12px;
+  color: #000;
+  background-color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   border-radius: 20px;
   transition: all 0.3s ease;
   z-index: 9999;
-  background-color: transparent;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 #settings-link:hover {
-  color: rgba(0, 0, 0, 0.8);
-  background-color: rgba(0, 0, 0, 0.05);
+  color: #000;
+  background-color: rgba(255, 255, 255, 0.9);
   transform: translateX(2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 #settings-link svg {

@@ -80,9 +80,20 @@
         url.style.color = settings.fontColor;
       });
     }
+    if (settings.bgImage) {
+      document.getElementById('background-layer').style.backgroundImage = `url(${settings.bgImage})`;
+    }
+    if (settings.bgImageStyle) {
+      const layer = document.getElementById('background-layer');
+      const style = settings.bgImageStyle;
+      layer.style.backgroundSize = style.size || 'cover';
+      layer.style.backgroundRepeat = style.repeat || 'no-repeat';
+      layer.style.filter = `brightness(${style.brightness || 1}) contrast(${style.contrast || 1})`;
+      layer.style.opacity = style.opacity || 1;
+    }
   }
 
-  chrome.storage.local.get(['bgColor', 'font', 'fontColor', 'urls'], function(items) {
+  chrome.storage.local.get(['bgColor', 'font', 'fontColor', 'urls', 'bgImage', 'bgImageStyle'], function(items) {
     applySettings(items);
 
     const urls = items.urls || [];
@@ -109,6 +120,16 @@
         urlLinks.forEach(url => {
           url.style.color = newValue;
         });
+      } else if (key === 'bgImage') {
+        document.getElementById('background-layer').style.backgroundImage = newValue ? `url(${newValue})` : '';
+      } else if (key === 'bgImageStyle') {
+        const layer = document.getElementById('background-layer');
+        if (newValue) {
+          layer.style.backgroundSize = newValue.size || 'cover';
+          layer.style.backgroundRepeat = newValue.repeat || 'no-repeat';
+          layer.style.filter = `brightness(${newValue.brightness || 1}) contrast(${newValue.contrast || 1})`;
+          layer.style.opacity = newValue.opacity || 1;
+        }
       }
     }
   });
