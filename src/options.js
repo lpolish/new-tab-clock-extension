@@ -46,6 +46,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  // Move slider listener here after storage load
+  sizeSlider.addEventListener('input', function() {
+    const size = this.value;
+    sizeValue.textContent = size;
+    chrome.storage.local.set({ 'size': size });
+  });
+
   document.getElementById('bgColor').addEventListener('change', function() {
     const color = this.value;
     chrome.storage.local.set({ 'bgColor': color });

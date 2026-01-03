@@ -130,6 +130,23 @@
           layer.style.filter = `brightness(${newValue.brightness || 1}) contrast(${newValue.contrast || 1})`;
           layer.style.opacity = newValue.opacity || 1;
         }
+      } else if (key === 'urls') {
+        const urlContainer = document.getElementById('urlContainer');
+        if (urlContainer) {
+          urlContainer.innerHTML = '';
+          const urls = newValue || [];
+          urls.forEach(function(urlObj) {
+            const urlElement = document.createElement('a');
+            urlElement.href = urlObj.url;
+            urlElement.textContent = urlObj.title;
+            // Apply current font color to match existing links
+            const currentFontColor = document.getElementById('time-date-container').style.color;
+            if (currentFontColor) {
+              urlElement.style.color = currentFontColor;
+            }
+            urlContainer.appendChild(urlElement);
+          });
+        }
       }
     }
   });
