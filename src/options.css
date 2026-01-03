@@ -345,6 +345,7 @@ footer {
 
   .url-input-group {
     grid-template-columns: 1fr;
+    align-items: stretch;
   }
 
   header h1 {

@@ -203,11 +203,24 @@
       // Show modal after a short delay
       setTimeout(() => {
         modal.classList.add('show');
+        const closeBtn = modal.querySelector('.modal-button');
+        if (closeBtn) closeBtn.focus();
       }, 800);
+
+      // Keyboard accessibility
+      const handleKeydown = function(e) {
+        if (e.key === 'Escape') {
+          modal.classList.remove('show');
+          chrome.storage.local.set({ 'hasSeenWelcome': true });
+          document.removeEventListener('keydown', handleKeydown);
+        }
+      };
+      document.addEventListener('keydown', handleKeydown);
 
       closeBtn.addEventListener('click', function() {
         modal.classList.remove('show');
         chrome.storage.local.set({ 'hasSeenWelcome': true });
+        document.removeEventListener('keydown', handleKeydown);
       });
 
       // Close on background click
@@ -215,6 +228,7 @@
         if (e.target === modal) {
           modal.classList.remove('show');
           chrome.storage.local.set({ 'hasSeenWelcome': true });
+          document.removeEventListener('keydown', handleKeydown);
         }
       });
     }
