@@ -2,12 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Update slider value display
   const sizeSlider = document.getElementById('sizeSlider');
   const sizeValue = document.getElementById('sizeValue');
-  
-  sizeSlider.addEventListener('input', function() {
-    const size = this.value;
-    sizeValue.textContent = size;
-    chrome.storage.local.set({ 'size': size });
-  });
 
   chrome.storage.local.get(['bgColor', 'font', 'fontColor', 'timeFormat', 'dateFormat', 'size', 'bgImageStyle'], function(items) {
     if (items.bgColor) {
@@ -173,6 +167,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const img = document.getElementById('cropper-image');
     img.style.filter = '';
     img.style.opacity = '';
+  });
+
+  // Remove background image button
+  document.getElementById('remove-bg-image').addEventListener('click', function() {
+    chrome.storage.local.remove(['bgImage', 'bgImageStyle'], function() {
+      document.getElementById('preview-img').src = '';
+      document.getElementById('image-preview').style.display = 'none';
+      document.getElementById('bgImageInput').value = '';
+      
+      // Reset style controls to defaults
+      document.getElementById('bgSize').value = 'cover';
+      document.getElementById('bgRepeat').value = 'no-repeat';
+      document.getElementById('brightness').value = 1;
+      document.getElementById('brightnessValue').textContent = 1;
+      document.getElementById('contrast').value = 1;
+      document.getElementById('contrastValue').textContent = 1;
+      document.getElementById('opacity').value = 1;
+      document.getElementById('opacityValue').textContent = 1;
+    });
   });
 });
 

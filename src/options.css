@@ -256,6 +256,38 @@ input[type="range"]::-moz-range-thumb:hover {
   transform: scale(1.05);
 }
 
+/* Remove background image button */
+.remove-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+}
+
+.remove-button:hover {
+  background: #ff3838;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+}
+
+.remove-button:active {
+  transform: translateY(0);
+}
+
+.remove-button svg {
+  width: 16px;
+  height: 16px;
+}
+
 /* Saved URLs scrolling */
 #savedUrls {
   max-height: 200px;

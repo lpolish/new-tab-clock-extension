@@ -85,7 +85,6 @@
     color: #fff;
     background-color: rgba(0, 0, 0, 0.6);
   }
-
 }
 
 /* Settings link in bottom-left corner */
@@ -118,6 +117,19 @@
 #settings-link svg {
   width: 18px;
   height: 18px;
+}
+
+/* Dark mode for settings link */
+@media (prefers-color-scheme: dark) {
+  #settings-link {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  #settings-link:hover {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.85);
+  }
 }
 
 /* Welcome modal */
