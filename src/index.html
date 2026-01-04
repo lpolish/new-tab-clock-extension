@@ -16,6 +16,25 @@
         <span id="date-content"></span>
       </div>
     </div>
+    
+    <!-- Settings link in bottom-left corner -->
+    <a id="settings-link" href="options.html" title="Customize your clock" aria-label="Open settings">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.983 1.378a1 1 0 00-1.966 0l-.254 1.53a5.502 5.502 0 00-1.548.894L5.83 3.21a1 1 0 00-1.366.366L3.21 5.17a1 1 0 00.366 1.366l1.592.955a5.5 5.5 0 000 1.918l-1.592.955a1 1 0 00-.366 1.366l1.255 2.178a1 1 0 001.366.366l1.385-.832a5.502 5.502 0 001.548.894l.254 1.53a1 1 0 001.966 0l.254-1.53a5.502 5.502 0 001.548-.894l1.385.832a1 1 0 001.366-.366l1.255-2.178a1 1 0 00-.366-1.366l-1.592-.955a5.5 5.5 0 000-1.918l1.592-.955a1 1 0 00.366-1.366L16.79 3.21a1 1 0 00-1.366-.366l-1.385.832a5.502 5.502 0 00-1.548-.894l-.254-1.53zM10 13a3 3 0 100-6 3 3 0 000 6z" />
+      </svg>
+      <span>Settings</span>
+    </a>
+
+    <!-- Onboarding welcome modal -->
+    <div id="welcome-modal" class="modal" role="dialog" aria-labelledby="welcome-title" aria-modal="true">
+      <div class="modal-content">
+        <h2 id="welcome-title">Welcome to New Tab Clock! 🎉</h2>
+        <p>Thank you for installing our minimalist clock extension.</p>
+        <p>You can customize your clock's appearance, colors, and fonts by clicking the <strong>Settings</strong> link in the bottom-left corner.</p>
+        <button id="welcome-close" class="modal-button">Get Started</button>
+      </div>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>

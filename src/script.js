@@ -68,23 +68,32 @@
 
   function applySettings(settings) {
     if (settings.bgColor) {
-      document.body.style.backgroundColor = settings.bgColor;
+      document.getElementById('background-layer').style.backgroundColor = settings.bgColor;
     }
     if (settings.font) {
       document.body.style.fontFamily = settings.font;
     }
-    if (settings.bgColor) {
-      document.getElementById('background-layer').style.backgroundColor = `rgba(${settings.bgColor}, 0.5)`;
-    }
     if (settings.fontColor) {
-      const urlLinks = document.querySelectorAll('.url-link');
+      document.getElementById('time-date-container').style.color = settings.fontColor;
+      const urlLinks = document.querySelectorAll('#urlContainer a');
       urlLinks.forEach(url => {
         url.style.color = settings.fontColor;
       });
     }
+    if (settings.bgImage) {
+      document.getElementById('background-layer').style.backgroundImage = `url(${settings.bgImage})`;
+    }
+    if (settings.bgImageStyle) {
+      const layer = document.getElementById('background-layer');
+      const style = settings.bgImageStyle;
+      layer.style.backgroundSize = style.size || 'cover';
+      layer.style.backgroundRepeat = style.repeat || 'no-repeat';
+      layer.style.filter = `brightness(${style.brightness || 1}) contrast(${style.contrast || 1})`;
+      layer.style.opacity = style.opacity || 1;
+    }
   }
 
-  chrome.storage.local.get(['bgColor', 'font', 'urls'], function(items) {
+  chrome.storage.local.get(['bgColor', 'font', 'fontColor', 'urls', 'bgImage', 'bgImageStyle'], function(items) {
     applySettings(items);
 
     const urls = items.urls || [];
@@ -102,9 +111,42 @@
     for (var key in changes) {
       const newValue = changes[key].newValue;
       if (key === 'bgColor') {
-        document.body.style.backgroundColor = newValue;
+        document.getElementById('background-layer').style.backgroundColor = newValue;
       } else if (key === 'font') {
         document.body.style.fontFamily = newValue;
+      } else if (key === 'fontColor') {
+        document.getElementById('time-date-container').style.color = newValue;
+        const urlLinks = document.querySelectorAll('#urlContainer a');
+        urlLinks.forEach(url => {
+          url.style.color = newValue;
+        });
+      } else if (key === 'bgImage') {
+        document.getElementById('background-layer').style.backgroundImage = newValue ? `url(${newValue})` : '';
+      } else if (key === 'bgImageStyle') {
+        const layer = document.getElementById('background-layer');
+        if (newValue) {
+          layer.style.backgroundSize = newValue.size || 'cover';
+          layer.style.backgroundRepeat = newValue.repeat || 'no-repeat';
+          layer.style.filter = `brightness(${newValue.brightness || 1}) contrast(${newValue.contrast || 1})`;
+          layer.style.opacity = newValue.opacity || 1;
+        }
+      } else if (key === 'urls') {
+        const urlContainer = document.getElementById('urlContainer');
+        if (urlContainer) {
+          urlContainer.innerHTML = '';
+          const urls = newValue || [];
+          urls.forEach(function(urlObj) {
+            const urlElement = document.createElement('a');
+            urlElement.href = urlObj.url;
+            urlElement.textContent = urlObj.title;
+            // Apply current font color to match existing links
+            const currentFontColor = document.getElementById('time-date-container').style.color;
+            if (currentFontColor) {
+              urlElement.style.color = currentFontColor;
+            }
+            urlContainer.appendChild(urlElement);
+          });
+        }
       }
     }
   });
@@ -149,6 +191,46 @@
   chrome.storage.onChanged.addListener(function(changes) {
     if (changes.size) {
       applySize(changes.size.newValue);
+    }
+  });
+
+  // Welcome modal logic - show only once on first install
+  chrome.storage.local.get(['hasSeenWelcome'], function(items) {
+    if (!items.hasSeenWelcome) {
+      const modal = document.getElementById('welcome-modal');
+      const closeBtn = document.getElementById('welcome-close');
+      
+      // Show modal after a short delay
+      setTimeout(() => {
+        modal.classList.add('show');
+        const closeBtn = modal.querySelector('.modal-button');
+        if (closeBtn) closeBtn.focus();
+      }, 800);
+
+      // Keyboard accessibility
+      const handleKeydown = function(e) {
+        if (e.key === 'Escape') {
+          modal.classList.remove('show');
+          chrome.storage.local.set({ 'hasSeenWelcome': true });
+          document.removeEventListener('keydown', handleKeydown);
+        }
+      };
+      document.addEventListener('keydown', handleKeydown);
+
+      closeBtn.addEventListener('click', function() {
+        modal.classList.remove('show');
+        chrome.storage.local.set({ 'hasSeenWelcome': true });
+        document.removeEventListener('keydown', handleKeydown);
+      });
+
+      // Close on background click
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('show');
+          chrome.storage.local.set({ 'hasSeenWelcome': true });
+          document.removeEventListener('keydown', handleKeydown);
+        }
+      });
     }
   });
 })();
