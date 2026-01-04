@@ -155,8 +155,12 @@
     const timeElement = document.getElementById('current-time');
     const dateElement = document.getElementById('current-date');
     
-    timeElement.style.fontSize = `${size}px`;
-    dateElement.style.fontSize = `${size * 0.6}px`;
+    const numericSize = typeof size === 'number' ? size : parseInt(size, 10);
+    if (isNaN(numericSize) || numericSize <= 0) {
+      return;
+    }
+    timeElement.style.fontSize = `${numericSize}px`;
+    dateElement.style.fontSize = `${numericSize * 0.6}px`;
   }
 
   function updateFavicon(hour, minute) {

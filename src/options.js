@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Move slider listener here after storage load
   sizeSlider.addEventListener('input', function() {
-    const size = this.value;
+    const size = parseInt(this.value, 10);
     sizeValue.textContent = size;
     chrome.storage.local.set({ 'size': size });
   });
