@@ -156,6 +156,9 @@
     const dateElement = document.getElementById('current-date');
     
     const numericSize = typeof size === 'number' ? size : parseInt(size, 10);
+    if (isNaN(numericSize) || numericSize <= 0) {
+      return;
+    }
     timeElement.style.fontSize = `${numericSize}px`;
     dateElement.style.fontSize = `${numericSize * 0.6}px`;
   }
